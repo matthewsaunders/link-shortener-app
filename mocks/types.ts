@@ -19,6 +19,10 @@ export type LinkResponse = {
   link: Link
 }
 
+export type LinkViewsResponse = {
+  views: any[]
+}
+
 // {
 //   id: '9d9bec51-162f-4d54-acb4-9185be6655a4',
 //   destination_url: 'https://www.aha.io/pricing',

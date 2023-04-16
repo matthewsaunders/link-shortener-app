@@ -1,4 +1,4 @@
-import { LinksResponse, LinkResponse } from './types';
+import { LinksResponse, LinkResponse, LinkViewsResponse } from './types';
 import { rest } from 'msw';
 
 export const handlers = [
@@ -26,6 +26,71 @@ export const handlers = [
             status: 'paused',
             total_views_count: 23456,
             name: 'Cotopaxi Altitude Tech',
+          },
+        ]
+      })
+    )
+  }),
+  rest.get('api/v1/links/:id/views', (_req, res, ctx) => {
+    return res(
+      ctx.delay(500),
+      ctx.json<LinkViewsResponse>({
+        views: [
+          {
+            date: '2023-03-14',
+            visits: 87,
+          },
+          {
+            date: '2023-03-13',
+            visits: 30,
+          },
+          {
+            date: '2023-03-12',
+            visits: 57,
+          },
+          {
+            date: '2023-03-11',
+            visits: 53,
+          },
+          {
+            date: '2023-03-10',
+            visits: 24,
+          },
+          {
+            date: '2023-03-09',
+            visits: 9,
+          },
+          {
+            date: '2023-03-08',
+            visits: 45,
+          },
+          {
+            date: '2023-03-07',
+            visits: 1,
+          },
+          {
+            date: '2023-03-06',
+            visits: 67,
+          },
+          {
+            date: '2023-03-05',
+            visits: 14,
+          },
+          {
+            date: '2023-03-04',
+            visits: 90,
+          },
+          {
+            date: '2023-03-03',
+            visits: 91,
+          },
+          {
+            date: '2023-03-02',
+            visits: 25,
+          },
+          {
+            date: '2023-03-01',
+            visits: 33,
           },
         ]
       })

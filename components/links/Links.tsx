@@ -21,7 +21,7 @@ export const Links = () => {
       .then((data) => {
         setLinks(data['links'] || []);
         setLinksLoading(false);
-      })
+      });
   }, []);
 
   return (

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { CalendarIcon, ClipboardDocumentIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid';
 
-import { Section } from '@/components/Section';
 import { copyTextToClipboard } from '@/utilities';
+import { ViewsGraph } from '@/components/links/ViewsGraph';
+import { Metrics } from '@/components/links/Metrics';
 
 interface DetailsProps {
   link?: object
@@ -14,7 +15,11 @@ const fullLink = (token: string): string => `http://${BASE_URL}${token}`
 
 export const Details: React.FC<DetailsProps> = ({ link }) => {
   if (!link) {
-    return <p>Empty</p>
+    return (
+      <div className="w-full h-full grid place-items-center">
+        <p className="text-gray-500 mx-auto">Select a link to view</p>
+      </div>
+    );
   }
 
   const [isCopied, setIsCopied] = useState(false);
@@ -53,7 +58,7 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
         </dl>
       </section>
 
-      <Section>
+      <section className="pt-4 xl:pt-8">
         <div className="flex justify-between items-start">
           <div>
             <h2 className="text-xl font-medium tracking-tight text-indigo-600 sm:text-3xl">
@@ -80,11 +85,15 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
             { isCopied ? 'Copied!' : 'Copy' }
           </button>
         </div>
-      </Section>
+      </section>
 
-      <Section>
-        TODO: Usage metrics here
-      </Section>
+      <section className="pt-4 xl:pt-8">
+        <Metrics />
+      </section>
+
+      <section className="pt-4 xl:pt-8 w-full h-96">
+        <ViewsGraph link={link} />
+      </section>
     </div>
   )
 }
