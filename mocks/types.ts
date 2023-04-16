@@ -2,7 +2,7 @@ import { UUID } from "crypto"
 
 export type Link = {
   id: UUID
-  destination_url: string
+  destination: string
   link_url: string
   token: string
   status: string

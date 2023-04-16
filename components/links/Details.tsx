@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CalendarIcon, ClipboardDocumentIcon, ChevronDoubleRightIcon } from '@heroicons/react/20/solid';
+import { CalendarIcon, ClipboardDocumentIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid';
 
 import { Section } from '@/components/Section';
 import { copyTextToClipboard } from '@/utilities';
@@ -59,6 +59,12 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
             <h2 className="text-xl font-medium tracking-tight text-indigo-600 sm:text-3xl">
               { `${BASE_URL}${link.token}` }
             </h2>
+
+            <div className="flex items-center mt-2">
+              <ArrowLongRightIcon className="h-5 w-5 mr-1.5 flex-shrink-0" />
+              <p>{ link.destination }</p>
+              <p className="text-gray-400 ml-3">(Redirect destination)</p>
+            </div>
           </div>
 
 
@@ -74,6 +80,10 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
             { isCopied ? 'Copied!' : 'Copy' }
           </button>
         </div>
+      </Section>
+
+      <Section>
+        TODO: Usage metrics here
       </Section>
     </div>
   )

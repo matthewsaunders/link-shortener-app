@@ -9,7 +9,7 @@ export const handlers = [
         links: [
           {
             id: '9d9bec51-162f-4d54-acb4-9185be6655a4',
-            destination_url: 'https://www.aha.io/pricing',
+            destination: 'https://www.aha.io/pricing',
             link_url: 'http://localhost:3030/abcxyz',
             token: 'abcxyz',
             name: 'Cotopaxi Altitude Tech 5-Panel Hat | REI Co-op',
@@ -19,7 +19,7 @@ export const handlers = [
           },
           {
             id: '9d9bec51-162f-4d54-acb4-9185be6655a5',
-            destination_url: 'https://www.aha.io/pricing',
+            destination: 'https://www.aha.io/pricing',
             link_url: 'http://localhost:3030/qwerTY',
             token: 'qwerTY',
             created_at: '2020-07-13',
@@ -38,7 +38,7 @@ export const handlers = [
       ctx.json<LinkResponse>({
         link: {
             id: '9d9bec51-162f-4d54-acb4-9185be6655a4',
-            destination_url: 'https://www.aha.io/pricing',
+            destination: 'https://www.aha.io/pricing',
             link_url: 'http://localhost:3030/abcxyz',
             token: 'abcxyz',
             // created_at: '2020-07-11',
