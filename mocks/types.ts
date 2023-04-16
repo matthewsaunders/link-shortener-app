@@ -7,6 +7,8 @@ export type Link = {
   token: string
   status: string
   total_views_count: number
+  name: string
+  created_at: string
 }
 
 export type LinksResponse = {

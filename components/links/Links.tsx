@@ -9,14 +9,16 @@ export const Links = () => {
   const [selectedLink, setSelectedLink] = useState(undefined);
   const [linksLoading, setLinksLoading] = useState(false);
 
+  const onSelectLink = (link) => {
+    setSelectedLink(link);
+  }
+
   useEffect(() => {
     setLinksLoading(true);
 
     fetch('/api/v1/links')
       .then((res) => res.json())
       .then((data) => {
-        console.log('DEBUG..');
-        console.log(data);
         setLinks(data['links'] || []);
         setLinksLoading(false);
       })
@@ -24,14 +26,15 @@ export const Links = () => {
 
   return (
     <>
-      <div className="flex h-full">
-        <aside className="border border-green-300 grow-0 h-full hidden w-96 overflow-y-auto border-r border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
+      <div className="flex h-full max-h-full">
+        <aside className="grow-0 h-full hidden w-96 overflow-y-scroll border border-gray-200 border-r-0 xl:block">
           { !!linksLoading && <Loading /> }
-          { !linksLoading && <List links={links} onSelectLink={setSelectedLink} /> }
+          { !linksLoading && <List links={links} selectedLinkId={selectedLink?.id} onSelectLink={onSelectLink} /> }
         </aside>
 
-        <main className="grow">
-          <div className="border border-blue-300 h-full px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+        <main className="grow border border-gray-200">
+          {/* <div className="h-full px-4 py-10 sm:px-6 lg:px-8 lg:py-6 overflow-y-scroll"> */}
+          <div className="h-full px-4 py-5 xl:px-8 xl:py-10 overflow-y-scroll">
             <Details link={selectedLink} />
           </div>
         </main>

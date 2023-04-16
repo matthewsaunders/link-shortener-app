@@ -4,7 +4,8 @@ import type { AppProps } from 'next/app'
 import { Container } from '@/components/Container'
 
 // Start msw
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+// if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+if (true) {
   require('../mocks')
 }
 
