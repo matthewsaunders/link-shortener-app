@@ -9,12 +9,7 @@ export const ViewsGraph:React.FC<ViewsGraphProps> = ({ link }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('DEBUG');
-  console.log(data);
-
   useEffect(() => {
-    console.log('link');
-    console.log(link);
     if (!link) {
       return
     }

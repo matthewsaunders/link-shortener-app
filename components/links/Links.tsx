@@ -26,7 +26,7 @@ export const Links = () => {
 
   return (
     <>
-      <div className="flex h-full max-h-full">
+      <div className="flex h-full max-h-full overflow-y-hidden">
         <aside className="grow-0 h-full hidden w-96 overflow-y-scroll border border-gray-200 border-r-0 xl:block">
           { !!linksLoading && <Loading /> }
           { !linksLoading && <List links={links} selectedLinkId={selectedLink?.id} onSelectLink={onSelectLink} /> }
