@@ -1,19 +1,22 @@
-const stats = [
-  { name: 'Total Visits', value: '123,456' },
-  { name: 'Visits / Day', value: '1,234' },
-];
+interface MetricsProps {
+  metrics: any[]
+}
 
-export function Metrics() {
+export const Metrics:React.FC<MetricsProps> = ({ metrics }) => {
+  if (metrics.length === 0) {
+    return (<></>)
+  }
+
   return (
     <dl className="mx-auto grid grid-cols-1 sm:grid-cols-3">
-      {stats.map((stat) => (
+      {metrics.map((metric) => (
         <div
-          key={stat.name}
+          key={metric.name}
           className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white py-8"
         >
-          <dt className="text-sm font-medium leading-6 text-gray-500">{stat.name}</dt>
+          <dt className="text-sm font-medium leading-6 text-gray-500">{metric.name}</dt>
           <dd className="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">
-            {stat.value}
+            {metric.value}
           </dd>
         </div>
       ))}

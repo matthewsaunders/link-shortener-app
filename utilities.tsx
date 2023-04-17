@@ -1,7 +1,7 @@
-const baseUrl = `localhost:3000`;
+export const BASE_URL = `localhost:4000`;
 
 export function generateUrlFromToken(token: string): string {
-  return `${baseUrl}/a/${token}`;
+  return `${BASE_URL}/a/${token}`;
 }
 
 export async function copyTextToClipboard(text: string) {

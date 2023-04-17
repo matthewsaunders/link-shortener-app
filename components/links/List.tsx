@@ -1,10 +1,10 @@
+import { BASE_URL } from '@/utilities';
+
 interface ListProps {
   selectedLinkId: string
   links: object[]
   onSelectLink: Function
 }
-
-const BASE_URL = `localhost:3000/a/`;
 
 export const List: React.FC<ListProps> = ({ links, selectedLinkId, onSelectLink }) => {
   const isSelectedLink = (link: any) => link.id === selectedLinkId
@@ -23,7 +23,7 @@ export const List: React.FC<ListProps> = ({ links, selectedLinkId, onSelectLink 
               <div className="mt-2">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-light text-indigo-600">
-                    { BASE_URL }
+                    { BASE_URL }/a/
                     <span className="font-medium">{ link.token }</span>
                   </p>
                 </div>

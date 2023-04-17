@@ -1,34 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-interface ViewsGraphProps {
-  link: any
+interface VisitsGraphProps {
+  data: any[]
 }
 
-export const ViewsGraph:React.FC<ViewsGraphProps> = ({ link }) => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!link) {
-      return
-    }
-
-    fetch(`/api/v1/links/${link.id}/views`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('DATA');
-        console.log(data);
-        setData(data['views'].reverse() || []);
-        setIsLoading(false);
-      });
-  }, [link]);
-
-  if (isLoading) {
-
-  }
+export const VisitsGraph:React.FC<VisitsGraphProps> = ({ data }) => {
   if (data.length === 0) {
-    return (<p>No data</p>);
+    return (<></>);
   }
 
   return (

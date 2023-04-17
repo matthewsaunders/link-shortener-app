@@ -1,19 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CalendarIcon, ClipboardDocumentIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid';
 
-import { copyTextToClipboard } from '@/utilities';
-import { ViewsGraph } from '@/components/links/ViewsGraph';
+import { copyTextToClipboard, BASE_URL } from '@/utilities';
+import { VisitsGraph } from '@/components/links/VisitsGraph';
 import { Metrics } from '@/components/links/Metrics';
+import { Loading } from '@/components/Loading';
 
 interface DetailsProps {
   link?: object
 }
 
-const BASE_URL = `localhost:3000/a/`;
-
-const fullLink = (token: string): string => `http://${BASE_URL}${token}`
+const fullLink = (token: string): string => `http://${BASE_URL}/a/${token}`
 
 export const Details: React.FC<DetailsProps> = ({ link }) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!link) {
+      return
+    }
+
+    setIsLoading(true);
+    fetch(`/api/v1/links/${link.id}/visits`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data?.data);
+        setIsLoading(false);
+      });
+  }, [link]);
+
   if (!link) {
     return (
       <div className="w-full h-full grid place-items-center">
@@ -21,8 +38,6 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
       </div>
     );
   }
-
-  const [isCopied, setIsCopied] = useState(false);
 
   const handleCopyClick = () => {
     copyTextToClipboard(fullLink(link.token))
@@ -36,6 +51,17 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
         console.log(err);
       });
   }
+
+  // Format created at date
+  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  const createdAtDate = new Date(link.created_at);
+  const createAtStr = createdAtDate.toLocaleDateString("en-US", dateOptions);
+
+  // Gather metrics
+  const metrics = [
+    { name: 'Total Visits', value: data?.total_visits?.toLocaleString("en-US") },
+    { name: 'Visits / Day', value: data?.visits_per_day?.toLocaleString("en-US") },
+  ];
 
   return (
     <div className="">
@@ -51,7 +77,7 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
               Issued on
             </dt>
             <dd className="inline text-gray-700">
-              <time dateTime="2023-23-01">January 23, 2023</time>
+              <time dateTime="2023-23-01">{ createAtStr }</time>
             </dd>
           </div>
           <div></div>
@@ -62,7 +88,7 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
         <div className="flex justify-between items-start">
           <div>
             <h2 className="text-xl font-medium tracking-tight text-indigo-600 sm:text-3xl">
-              { `${BASE_URL}${link.token}` }
+              { fullLink(link.token) }
             </h2>
 
             <div className="flex items-center mt-2">
@@ -87,13 +113,26 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
         </div>
       </section>
 
-      <section className="pt-4 xl:pt-8">
-        <Metrics />
-      </section>
+      {
+        !!isLoading &&
+        <div className="h-48">
+          <Loading />
+        </div>
+      }
 
-      <section className="pt-4 xl:pt-8 w-full h-96">
-        <ViewsGraph link={link} />
-      </section>
+      {
+        !isLoading &&
+        <>
+          <section className="pt-4 xl:pt-8">
+            <Metrics metrics={metrics} />
+          </section>
+
+          <section className="pt-4 xl:pt-8 w-full h-96">
+            <VisitsGraph data={data?.visits?.reverse() || []} />
+          </section>
+        </>
+      }
+
     </div>
   )
 }

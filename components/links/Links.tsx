@@ -19,7 +19,7 @@ export const Links = () => {
     fetch('/api/v1/links')
       .then((res) => res.json())
       .then((data) => {
-        setLinks(data['links'] || []);
+        setLinks(data?.links || []);
         setLinksLoading(false);
       });
   }, []);
