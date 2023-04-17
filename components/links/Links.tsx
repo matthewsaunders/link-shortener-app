@@ -33,7 +33,6 @@ export const Links = () => {
         </aside>
 
         <main className="grow border border-gray-200">
-          {/* <div className="h-full px-4 py-10 sm:px-6 lg:px-8 lg:py-6 overflow-y-scroll"> */}
           <div className="h-full px-4 py-5 xl:px-8 xl:py-10 overflow-y-scroll">
             <Details link={selectedLink} />
           </div>

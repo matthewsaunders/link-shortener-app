@@ -21,7 +21,7 @@ export default function Dashboard() {
           New Link
         </button>
       </div>
-      <div className="grow h-full my-4">
+      <div className="grow h-full pt-4 pb-6">
         <Links />
       </div>
 

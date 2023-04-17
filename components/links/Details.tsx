@@ -44,7 +44,7 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
           { link.name }
         </h2>
 
-        <dl className="mt-2 text-sm leading-6">
+        <dl className="pt-1 text-sm leading-6">
           <div className="flex items-center">
             <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
             <dt className="inline text-gray-500 mr-1.5">
