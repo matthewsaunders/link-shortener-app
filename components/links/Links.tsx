@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { List } from '@/components/links/List';
 import { Details } from '@/components/links/Details';
 import { Loading } from '@/components/Loading';
+import { BASE_URL, fetcher } from '@/utilities';
 
 export const Links = () => {
   const [links, setLinks] = useState([]);
@@ -16,12 +17,28 @@ export const Links = () => {
   useEffect(() => {
     setLinksLoading(true);
 
-    fetch('/api/v1/links')
+    try {
+      fetch(
+        `${BASE_URL}/v1/links`,
+        {
+          headers: {
+            'Origin': '*',
+            'Access-Control-Request-Method': 'true',
+          }
+        }
+      )
       .then((res) => res.json())
       .then((data) => {
         setLinks(data?.links || []);
         setLinksLoading(false);
-      });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+    } catch(err) {
+      console.error(err);
+    }
+
   }, []);
 
   return (

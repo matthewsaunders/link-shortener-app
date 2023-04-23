@@ -2,7 +2,7 @@ import { LinksResponse, LinkResponse, LinkViewsResponse } from './types';
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get('api/v1/links', (_req, res, ctx) => {
+  rest.get('v1/links', (_req, res, ctx) => {
     return res(
       ctx.delay(500),
       ctx.json<LinksResponse>({
@@ -25,7 +25,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get('api/v1/links/:id/visits', (_req, res, ctx) => {
+  rest.get('v1/links/:id/visits', (_req, res, ctx) => {
     return res(
       ctx.delay(500),
       ctx.json<LinkVisitsResponse>({
@@ -94,7 +94,7 @@ export const handlers = [
       })
     )
   }),
-  rest.post('api/v1/links', (_req, res, ctx) => {
+  rest.post('v1/links', (_req, res, ctx) => {
     return res(
       ctx.status(201),
       ctx.delay(1000),

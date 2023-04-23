@@ -10,7 +10,7 @@ interface DetailsProps {
   link?: object
 }
 
-const fullLink = (token: string): string => `http://${BASE_URL}/a/${token}`
+const fullLink = (token: string): string => `${BASE_URL}/a/${token}`
 
 export const Details: React.FC<DetailsProps> = ({ link }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -23,12 +23,15 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
     }
 
     setIsLoading(true);
-    fetch(`/api/v1/links/${link.id}/visits`)
-      .then((res) => res.json())
-      .then((data) => {
+    fetch(`${BASE_URL}/v1/links/${link.id}/visits`)
+      .then(res => res.json())
+      .then(data => {
         setData(data?.data);
         setIsLoading(false);
-      });
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }, [link]);
 
   if (!link) {
@@ -122,6 +125,15 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
 
       {
         !isLoading &&
+        !data &&
+        <div className="w-full h-full grid place-items-center">
+          <p className="text-gray-500 mx-auto">No data</p>
+        </div>
+      }
+
+      {
+        !isLoading &&
+        !!data &&
         <>
           <section className="pt-4 xl:pt-8">
             <Metrics metrics={metrics} />

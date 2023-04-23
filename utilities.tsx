@@ -1,4 +1,6 @@
-export const BASE_URL = `localhost:4000`;
+export const BASE_URL = `http://localhost:4000`;
+// For development with msw
+// export const BASE_URL = ``;
 
 export function generateUrlFromToken(token: string): string {
   return `${BASE_URL}/a/${token}`;

@@ -7,9 +7,8 @@ import { Container } from '@/components/Container'
 
 // Start msw
 // if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-if (true) {
-  require('../mocks')
-}
+//   require('../mocks')
+// }
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

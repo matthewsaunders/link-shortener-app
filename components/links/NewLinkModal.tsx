@@ -2,14 +2,16 @@ import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
+import { BASE_URL } from '@/utilities';
+
 interface ModalProps {
   isOpen: boolean
   setIsOpen: any
 }
 
 export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
-  const [destination, setDestination] = useState('');
-  const [name, setName] = useState('');
+  const [destination, setDestination] = useState('https://heroicons.com/');
+  const [name, setName] = useState('HeroIcons');
 
   const clearForm = () => {
     setDestination('');
@@ -23,9 +25,31 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
     console.log(destination);
     console.log(name);
 
-    // Assuming things go well
-    clearForm();
-    setIsOpen(false);
+    const formData = { name, destination };
+
+    fetch(`${BASE_URL}/v1/links/`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'same-origin',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(resp => {
+        if (resp.status === 201) {
+          clearForm();
+          setIsOpen(false);
+        } else {
+          // TODO: Handle error
+        }
+      })
+      .then(data => {
+        // TODO: Show link to newly created link
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   return (
