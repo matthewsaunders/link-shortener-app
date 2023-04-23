@@ -15,7 +15,7 @@ interface LinksProps {
 export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLinks, createNewLink }) => {
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState(undefined);
-  const [linksLoading, setLinksLoading] = useState(false);
+  const [linksLoading, setLinksLoading] = useState(true);
 
   const onSelectLink = (link: any) => {
     setSelectedLink(link);
@@ -48,12 +48,21 @@ export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLink
 
   }, [reloadLinks]);
 
+  // Loading screen
+  if (linksLoading) {
+    return (
+      <Loading />
+    )
+  }
+
+  // Empty State screen
   if (!linksLoading && links.length === 0) {
     return (
       <EmptyState createNewLink={createNewLink} />
     )
   }
 
+  // Links screen
   return (
     <>
       <div className="flex h-full max-h-full overflow-y-hidden">
