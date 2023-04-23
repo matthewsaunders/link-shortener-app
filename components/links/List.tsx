@@ -9,6 +9,14 @@ interface ListProps {
 export const List: React.FC<ListProps> = ({ links, selectedLinkId, onSelectLink }) => {
   const isSelectedLink = (link: any) => link.id === selectedLinkId
 
+  if (links.length === 0) {
+    return (
+      <div className="w-full h-full grid place-items-center">
+        <p className="text-gray-500 mx-auto">No links</p>
+      </div>
+    )
+  }
+
   return (
     <div className="overflow-hidden bg-white shadow">
       <ul role="list" className="divide-y divide-gray-200">

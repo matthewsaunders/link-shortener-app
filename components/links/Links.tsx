@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 
 import { List } from '@/components/links/List';
 import { Details } from '@/components/links/Details';
+import { EmptyState } from '@/components/links/EmptyState';
 import { Loading } from '@/components/Loading';
 import { BASE_URL } from '@/utilities';
 
 interface LinksProps {
   reloadLinks: boolean
   setReloadLinks: Function
+  createNewLink: Function
 }
 
-export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLinks }) => {
+export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLinks, createNewLink }) => {
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState(undefined);
   const [linksLoading, setLinksLoading] = useState(false);
@@ -45,6 +47,12 @@ export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLink
     })
 
   }, [reloadLinks]);
+
+  if (!linksLoading && links.length === 0) {
+    return (
+      <EmptyState createNewLink={createNewLink} />
+    )
+  }
 
   return (
     <>

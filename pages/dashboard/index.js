@@ -5,7 +5,7 @@ import { NewLinkModal } from '@/components/links/NewLinkModal';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [reloadLinks, setReloadLinks] = useState(true);
 
   return (
@@ -16,17 +16,17 @@ export default function Dashboard() {
         <button
           type="button"
           className="mt-3 inline-flex w-full flex justify-center content-center items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-          onClick={() => setIsOpen(true)}
+          onClick={() => setIsModalOpen(true)}
         >
           <PlusIcon className="mr-1 h-4 w-4" />
           New Link
         </button>
       </div>
       <div className="grow h-full pt-4 pb-6">
-        <Links reloadLinks={reloadLinks} setReloadLinks={setReloadLinks} />
+        <Links reloadLinks={reloadLinks} setReloadLinks={setReloadLinks} createNewLink={() => setIsModalOpen(true)} />
       </div>
 
-      <NewLinkModal isOpen={isOpen} setIsOpen={setIsOpen} setReloadLinks={setReloadLinks} />
+      <NewLinkModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setReloadLinks={setReloadLinks} />
     </div>
   )
 }

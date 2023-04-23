@@ -5,12 +5,12 @@ import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { BASE_URL } from '@/utilities';
 
 interface ModalProps {
-  isOpen: boolean
-  setIsOpen: any
+  isModalOpen: boolean
+  setIsModalOpen: any
   setReloadLinks: Function
 }
 
-export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen, setReloadLinks }) => {
+export const NewLinkModal:React.FC<ModalProps> = ({ isModalOpen, setIsModalOpen, setReloadLinks }) => {
   const [destination, setDestination] = useState('https://heroicons.com/');
   const [name, setName] = useState('HeroIcons');
 
@@ -36,7 +36,7 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen, setReload
       .then(resp => {
         if (resp.status === 201) {
           clearForm();
-          setIsOpen(false);
+          setIsModalOpen(false);
           setReloadLinks(true);
         } else {
           // TODO: Handle error
@@ -51,8 +51,8 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen, setReload
   }
 
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setIsOpen}>
+    <Transition.Root show={isModalOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={setIsModalOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -81,7 +81,7 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen, setReload
                   <button
                     type="button"
                     className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsModalOpen(false)}
                   >
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -143,7 +143,7 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen, setReload
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsModalOpen(false)}
                   >
                     Cancel
                   </button>
