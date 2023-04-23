@@ -5,7 +5,8 @@ import { NewLinkModal } from '@/components/links/NewLinkModal';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [reloadLinks, setReloadLinks] = useState(true);
 
   return (
     <div className="h-full flex flex-col py-4 xl:py-8">
@@ -22,10 +23,10 @@ export default function Dashboard() {
         </button>
       </div>
       <div className="grow h-full pt-4 pb-6">
-        <Links />
+        <Links reloadLinks={reloadLinks} setReloadLinks={setReloadLinks} />
       </div>
 
-      <NewLinkModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <NewLinkModal isOpen={isOpen} setIsOpen={setIsOpen} setReloadLinks={setReloadLinks} />
     </div>
   )
 }

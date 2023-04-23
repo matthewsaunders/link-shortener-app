@@ -7,9 +7,10 @@ import { BASE_URL } from '@/utilities';
 interface ModalProps {
   isOpen: boolean
   setIsOpen: any
+  setReloadLinks: Function
 }
 
-export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen, setReloadLinks }) => {
   const [destination, setDestination] = useState('https://heroicons.com/');
   const [name, setName] = useState('HeroIcons');
 
@@ -20,10 +21,6 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    console.log('handleSubmit');
-    console.log(destination);
-    console.log(name);
 
     const formData = { name, destination };
 
@@ -40,6 +37,7 @@ export const NewLinkModal:React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
         if (resp.status === 201) {
           clearForm();
           setIsOpen(false);
+          setReloadLinks(true);
         } else {
           // TODO: Handle error
         }

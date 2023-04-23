@@ -3,43 +3,48 @@ import { useState, useEffect } from 'react';
 import { List } from '@/components/links/List';
 import { Details } from '@/components/links/Details';
 import { Loading } from '@/components/Loading';
-import { BASE_URL, fetcher } from '@/utilities';
+import { BASE_URL } from '@/utilities';
 
-export const Links = () => {
+interface LinksProps {
+  reloadLinks: boolean
+  setReloadLinks: Function
+}
+
+export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLinks }) => {
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState(undefined);
   const [linksLoading, setLinksLoading] = useState(false);
 
-  const onSelectLink = (link) => {
+  const onSelectLink = (link: any) => {
     setSelectedLink(link);
   }
 
   useEffect(() => {
+    // Only load links
+    if (!reloadLinks) { return }
+
     setLinksLoading(true);
 
-    try {
-      fetch(
-        `${BASE_URL}/v1/links`,
-        {
-          headers: {
-            'Origin': '*',
-            'Access-Control-Request-Method': 'true',
-          }
+    fetch(
+      `${BASE_URL}/v1/links`,
+      {
+        headers: {
+          'Origin': '*',
+          'Access-Control-Request-Method': 'true',
         }
-      )
-      .then((res) => res.json())
-      .then((data) => {
-        setLinks(data?.links || []);
-        setLinksLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-    } catch(err) {
+      }
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      setLinks(data?.links || []);
+      setLinksLoading(false);
+      setReloadLinks(false);
+    })
+    .catch((err) => {
       console.error(err);
-    }
+    })
 
-  }, []);
+  }, [reloadLinks]);
 
   return (
     <>
