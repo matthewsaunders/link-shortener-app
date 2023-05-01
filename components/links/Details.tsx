@@ -63,7 +63,8 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
   // Gather metrics
   const metrics = [
     { name: 'Total Visits', value: data?.total_visits?.toLocaleString("en-US") },
-    { name: 'Visits / Day', value: data?.visits_per_day?.toLocaleString("en-US") },
+    { name: 'Visits Past 7 Days', value: data?.seven_day_visits?.toLocaleString("en-US") },
+    { name: 'Avg. Visits / Day', value: data?.visits_per_day?.toLocaleString("en-US") },
   ];
 
   return (
@@ -77,7 +78,7 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
           <div className="flex items-center">
             <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
             <dt className="inline text-gray-500 mr-1.5">
-              Issued on
+              Created on
             </dt>
             <dd className="inline text-gray-700">
               <time dateTime="2023-23-01">{ createAtStr }</time>

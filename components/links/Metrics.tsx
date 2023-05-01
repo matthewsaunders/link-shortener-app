@@ -12,7 +12,7 @@ export const Metrics:React.FC<MetricsProps> = ({ metrics }) => {
       {metrics.map((metric) => (
         <div
           key={metric.name}
-          className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white py-8"
+          className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0 bg-white pt-2 pb-8"
         >
           <dt className="text-sm font-medium leading-6 text-gray-500">{metric.name}</dt>
           <dd className="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">
