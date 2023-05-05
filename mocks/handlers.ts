@@ -1,4 +1,4 @@
-import { LinksResponse, LinkResponse, LinkViewsResponse } from './types';
+import { LinksResponse, LinkResponse, LinkVisitsResponse } from '@/mocks/types';
 import { rest } from 'msw';
 
 export const handlers = [
@@ -90,6 +90,7 @@ export const handlers = [
           ],
           total_visits: 123456,
           visits_per_day: 12345,
+          seven_day_visits: 23456,
         },
       })
     )

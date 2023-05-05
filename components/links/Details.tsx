@@ -5,16 +5,17 @@ import { copyTextToClipboard, BASE_URL } from '@/utilities';
 import { VisitsGraph } from '@/components/links/VisitsGraph';
 import { Metrics } from '@/components/links/Metrics';
 import { Loading } from '@/components/Loading';
+import { Linkk, LinkVisitsData } from '@/types';
 
 interface DetailsProps {
-  link?: object
+  link?: Linkk
 }
 
-const fullLink = (token: string): string => `${BASE_URL}/a/${token}`
+const fullLink = (token: string): string => `${BASE_URL}/a/${token}`;
 
 export const Details: React.FC<DetailsProps> = ({ link }) => {
   const [isCopied, setIsCopied] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<LinkVisitsData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export const Details: React.FC<DetailsProps> = ({ link }) => {
   }
 
   // Format created at date
-  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   const createdAtDate = new Date(link.created_at);
   const createAtStr = createdAtDate.toLocaleDateString("en-US", dateOptions);
 

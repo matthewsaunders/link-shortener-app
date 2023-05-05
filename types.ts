@@ -1,5 +1,6 @@
 import { UUID } from "crypto"
 
+// Type Link is spelt Linkk because of a collision with next.js Link component
 export type Linkk = {
   id: UUID
   destination: string
@@ -13,16 +14,4 @@ export type LinkVisitsData = {
   total_visits: number
   seven_day_visits: number
   visits_per_day: number
-}
-
-export type LinksResponse = {
-  links: Linkk[]
-}
-
-export type LinkResponse = {
-  link: Linkk
-}
-
-export type LinkVisitsResponse = {
-  data: LinkVisitsData
 }

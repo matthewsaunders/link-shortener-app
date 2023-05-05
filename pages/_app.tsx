@@ -6,9 +6,9 @@ import '@/styles/globals.css'
 import { Container } from '@/components/Container'
 
 // Start msw
-// if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-//   require('../mocks')
-// }
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('../mocks')
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

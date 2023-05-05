@@ -1,8 +1,10 @@
 import { BASE_URL } from '@/utilities';
+import { UUID } from 'crypto';
+import { Linkk } from '@/types';
 
 interface ListProps {
-  selectedLinkId: string
-  links: object[]
+  selectedLinkId: UUID | undefined
+  links: Linkk[]
   onSelectLink: Function
 }
 

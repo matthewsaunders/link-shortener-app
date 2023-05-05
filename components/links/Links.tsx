@@ -5,6 +5,7 @@ import { Details } from '@/components/links/Details';
 import { EmptyState } from '@/components/links/EmptyState';
 import { Loading } from '@/components/Loading';
 import { BASE_URL } from '@/utilities';
+import { Linkk } from '@/types';
 
 interface LinksProps {
   reloadLinks: boolean
@@ -14,7 +15,7 @@ interface LinksProps {
 
 export const Links: React.FC<LinksProps> = ({ reloadLinks = false, setReloadLinks, createNewLink }) => {
   const [links, setLinks] = useState([]);
-  const [selectedLink, setSelectedLink] = useState(undefined);
+  const [selectedLink, setSelectedLink] = useState<Linkk | undefined>(undefined);
   const [linksLoading, setLinksLoading] = useState(true);
 
   const onSelectLink = (link: any) => {
